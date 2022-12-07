@@ -57,7 +57,7 @@ public class DBHelper  extends SQLiteOpenHelper
          db.execSQL("drop table if exists Books");
          db.execSQL("drop table if exists Cart");
          onCreate(db);
-         /**/
+
      }
 
 
