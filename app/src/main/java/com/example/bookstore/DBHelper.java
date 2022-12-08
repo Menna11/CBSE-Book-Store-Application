@@ -77,10 +77,6 @@ public void createNewBook(int bookid, String name, String publisher, String cate
     libraryDatabase=getWritableDatabase();
     libraryDatabase.insert("Books",null,row);
     libraryDatabase.close();
-
-
-
-
 }
 
 public Cursor fetchBooks()
@@ -94,15 +90,22 @@ public Cursor fetchBooks()
         }
         libraryDatabase.close();
         return cursor;
-
-
-
     }
 
+public Cursor getBook(String bookName)
+{
+    libraryDatabase=getReadableDatabase();
+    String [] arg={bookName};
+    Cursor cursor=libraryDatabase.rawQuery("select * from Books where name like ?",arg);
 
+    if(cursor.getCount()!=0)
+    {
+        cursor.moveToFirst();
+        libraryDatabase.close();
+        return cursor;
+    }
 
-
-
-
-
+    libraryDatabase.close();
+    return null;
+}
 }

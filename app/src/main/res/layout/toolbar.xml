@@ -6,17 +6,17 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:padding="16dp">
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:textSize="28sp"
-        android:textColor="@android:color/black"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Book Store"/>
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:text="Book Store"
+            android:textColor="@android:color/black"
+            android:textSize="28sp" />
     </RelativeLayout>
 </RelativeLayout>
