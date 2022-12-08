@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity{
         Button homeBtn= findViewById(R.id.homeBtn);
         Button categoryBtn= findViewById(R.id.categoryBtn);
         Button cartBtn= findViewById(R.id.cartBtn);
+        Button adminBtn= findViewById(R.id.adminBtn);
 
         homeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -39,6 +40,14 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(MainActivity.this,Cart.class);
+                startActivity(i);
+            }
+        });
+
+        adminBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Admin.class);
                 startActivity(i);
             }
         });

@@ -1,12 +1,14 @@
 package com.example.bookstore;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper  extends SQLiteOpenHelper
 {
-    private static String databaseName = "libraryDatabase";
+    private static final String databaseName = "libraryDatabase";
     SQLiteDatabase libraryDatabase ;
      public DBHelper (Context context)
      {
@@ -17,7 +19,7 @@ public class DBHelper  extends SQLiteOpenHelper
     public void onCreate(SQLiteDatabase db)
      {
          db.execSQL("create table User(" +
-                 "userid integer primary key " +
+                 "userid integer primary key autoincrement " +
                  ", name text" +
                  ",email text " +
                  ", password text " +
@@ -28,7 +30,7 @@ public class DBHelper  extends SQLiteOpenHelper
 
 
                  db.execSQL("create table Books(" +
-                         "bookid integer primary key" +
+                         "bookid integer primary key autoincrement" +
                          ",name text " +
                          ",publisher text " +
                          ",category text " +
@@ -40,7 +42,7 @@ public class DBHelper  extends SQLiteOpenHelper
 
 
                  db.execSQL("create table Cart(" +
-                         "orderid integer primary key " +
+                         "orderid integer primary key autoincrement " +
                          ",totalprice integer " +
                          ",bookids integer" +
                          ",userids integer " +
@@ -59,6 +61,45 @@ public class DBHelper  extends SQLiteOpenHelper
          onCreate(db);
 
      }
+
+public void createNewBook(int bookid, String name, String publisher, String category, String author, int quantity, int price, String description)
+{
+    ContentValues row = new ContentValues();
+    row.put("bookid",bookid);
+    row.put("name",name);
+    row.put("publisher",publisher);
+    row.put("category",category);
+    row.put("author",author);
+    row.put("quantity",quantity);
+    row.put("price",price);
+    row.put("description",description);
+
+    libraryDatabase=getWritableDatabase();
+    libraryDatabase.insert("Books",null,row);
+    libraryDatabase.close();
+
+
+
+
+}
+
+public Cursor fetchBooks()
+    {
+        libraryDatabase=getReadableDatabase();
+        String[] rowDetails={"bookid","name","publisher","category","author","quantity","price","description"};
+        Cursor cursor=libraryDatabase.query("Books",rowDetails,null,null,null,null,null);
+        if (cursor!=null)
+        {
+            cursor.moveToFirst();
+        }
+        libraryDatabase.close();
+        return cursor;
+
+
+
+    }
+
+
 
 
 
