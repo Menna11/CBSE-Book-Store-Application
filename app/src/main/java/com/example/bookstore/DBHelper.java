@@ -12,7 +12,8 @@ public class DBHelper  extends SQLiteOpenHelper
     SQLiteDatabase libraryDatabase ;
      public DBHelper (Context context)
      {
-         super(context,databaseName,null,1);
+         super(context,databaseName,null,2);
+         libraryDatabase=this.getWritableDatabase();
      }
 
      @Override
@@ -50,6 +51,19 @@ public class DBHelper  extends SQLiteOpenHelper
                          ",foreign key (userids) references User (userid)" +
                          ");");
 
+                   ContentValues value= new ContentValues();
+                   value.put("name","Love on the Brain");
+                   value.put("publisher","Penguin Publishing Group");
+                   value.put("category","Romance");
+                   value.put("author","Ali Hazelwood");
+                   value.put("quantity",5);
+                   value.put("price",211.75);
+                   value.put("description","From the New York Times bestselling author of The Love Hypothesis comes a new STEMinist rom-com in which a scientist is forced to work on a project with her nemesis—with explosive results.");
+
+
+                   db.insert("Books",null,value);
+
+
      }
 
      @Override
@@ -58,6 +72,7 @@ public class DBHelper  extends SQLiteOpenHelper
          db.execSQL("drop table if exists User");
          db.execSQL("drop table if exists Books");
          db.execSQL("drop table if exists Cart");
+
          onCreate(db);
 
      }
