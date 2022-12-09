@@ -29,6 +29,7 @@ public class ShowBooks extends AppCompatActivity{
         TextView price=findViewById(R.id.Price);
         TextView description=findViewById(R.id.Description);
 
+        //setting TextBoxes
         name.setText(RetrievedName);
         author.setText(cursor.getString(4));
         publisher.setText(cursor.getString(2));
@@ -37,10 +38,10 @@ public class ShowBooks extends AppCompatActivity{
         price.setText(cursor.getString(6)+" LE");
         description.setText(cursor.getString(7));
 
+        //Bottom navigation buttons
         Button homeBtn= findViewById(R.id.homeBtn);
         Button categoryBtn= findViewById(R.id.categoryBtn);
         Button cartBtn= findViewById(R.id.cartBtn);
-        Button adminBtn= findViewById(R.id.adminBtn);
 
         homeBtn.setOnClickListener(new View.OnClickListener(){
             @Override

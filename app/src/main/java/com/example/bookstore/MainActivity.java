@@ -26,43 +26,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button homeBtn= findViewById(R.id.homeBtn);
-        Button categoryBtn= findViewById(R.id.categoryBtn);
-        Button cartBtn= findViewById(R.id.cartBtn);
-        Button adminBtn= findViewById(R.id.adminBtn);
-
-        homeBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,MainActivity.class);
-                startActivity(i);
-            }
-        });
-
-        categoryBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,Category.class);
-                startActivity(i);
-            }
-        });
-
-        cartBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,Cart.class);
-                startActivity(i);
-            }
-        });
-
-        adminBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,Admin.class);
-                startActivity(i);
-            }
-        });
-
         final DBHelper libraryDBHelper=new DBHelper(this);
         final EditText libraryNameText=(EditText) findViewById(R.id.SearchText);
         Button searchBtn=(Button) findViewById(R.id.SearchBtn);
@@ -122,10 +85,43 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Bottom navigation buttons
+        Button homeBtn= findViewById(R.id.homeBtn);
+        Button categoryBtn= findViewById(R.id.categoryBtn);
+        Button cartBtn= findViewById(R.id.cartBtn);
+        Button adminBtn= findViewById(R.id.adminBtn);
 
+        homeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
 
+        categoryBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,Category.class);
+                startActivity(i);
+            }
+        });
 
+        cartBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,Cart.class);
+                startActivity(i);
+            }
+        });
 
+        adminBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Admin.class);
+                startActivity(i);
+            }
+        });
 
     }
 }

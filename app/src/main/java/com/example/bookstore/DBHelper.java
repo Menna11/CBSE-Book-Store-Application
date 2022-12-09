@@ -125,14 +125,4 @@ public Cursor fetchBooks()
         libraryDatabase.close();
         return null;
     }
-
-    public String getAuthorName(String authorName)
-    {
-        libraryDatabase=getReadableDatabase();
-        String [] arg={authorName};
-        Cursor cursor=libraryDatabase.rawQuery("select author from Books where author like ?",arg);
-        cursor.moveToFirst();
-        libraryDatabase.close();
-        return cursor.getString(0);
-    }
 }
