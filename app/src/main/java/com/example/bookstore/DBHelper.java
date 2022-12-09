@@ -92,20 +92,47 @@ public Cursor fetchBooks()
         return cursor;
     }
 
-public Cursor getBook(String bookName)
-{
-    libraryDatabase=getReadableDatabase();
-    String [] arg={bookName};
-    Cursor cursor=libraryDatabase.rawQuery("select * from Books where name like ?",arg);
-
-    if(cursor.getCount()!=0)
+    public Cursor getBook(String bookName)
     {
+       libraryDatabase=getReadableDatabase();
+       String [] arg={bookName};
+       Cursor cursor=libraryDatabase.rawQuery("select * from Books where name like ?",arg);
+
+       if(cursor.getCount()!=0)
+       {
         cursor.moveToFirst();
         libraryDatabase.close();
         return cursor;
+       }
+
+       libraryDatabase.close();
+       return null;
     }
 
-    libraryDatabase.close();
-    return null;
-}
+    public Cursor getAuthor(String authorName)
+    {
+        libraryDatabase=getReadableDatabase();
+        String [] arg={authorName};
+        Cursor cursor=libraryDatabase.rawQuery("select * from Books where author like ?",arg);
+
+        if(cursor.getCount()!=0)
+        {
+            cursor.moveToFirst();
+            libraryDatabase.close();
+            return cursor;
+        }
+
+        libraryDatabase.close();
+        return null;
+    }
+
+    public String getAuthorName(String authorName)
+    {
+        libraryDatabase=getReadableDatabase();
+        String [] arg={authorName};
+        Cursor cursor=libraryDatabase.rawQuery("select author from Books where author like ?",arg);
+        cursor.moveToFirst();
+        libraryDatabase.close();
+        return cursor.getString(0);
+    }
 }

@@ -16,15 +16,15 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
-    Cursor cursor;
+    Cursor bookCursor;
+    Cursor authorCursor;
     ArrayAdapter<String> booksNamesAdapter;
+    Boolean isSearchForBook=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         Button homeBtn= findViewById(R.id.homeBtn);
         Button categoryBtn= findViewById(R.id.categoryBtn);
@@ -75,21 +75,29 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String libraryName=libraryNameText.getText().toString();
-                cursor=libraryDBHelper.getBook(libraryName);
+
+                isSearchForBook=true;
+                bookCursor=libraryDBHelper.getBook(libraryName);
+                authorCursor=libraryDBHelper.getAuthor(libraryName);
 
                 booksNamesAdapter.clear();
 
-                if(cursor!=null)
+                if(bookCursor!=null)
                 {
-                    while(!cursor.isAfterLast())
+                    while(!bookCursor.isAfterLast())
                     {
-                        booksNamesAdapter.add(cursor.getString(1));
-                        cursor.moveToNext();
+                        booksNamesAdapter.add(bookCursor.getString(1));
+                        bookCursor.moveToNext();
                     }
+                }
+                else if(authorCursor!=null)
+                {
+                    isSearchForBook=false;
+                    booksNamesAdapter.add(authorCursor.getString(4));
                 }
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"No matched Books",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Try Again! No matched Books and Authors.",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -99,7 +107,16 @@ public class MainActivity extends AppCompatActivity{
             public void onItemClick(AdapterView<?> parent, View view, int position,long id)
             {
                 String name=(((TextView)view).getText().toString());
-                Intent i=new Intent(MainActivity.this,ShowBooks.class);
+                Intent i;
+
+                if(isSearchForBook)
+                {
+                    i=new Intent(MainActivity.this,ShowBooks.class);
+                }
+                else{
+                    i=new Intent(MainActivity.this,ShowAuthorBooks.class);
+                }
+
                 i.putExtra("name",name);
                 startActivity(i);
             }

@@ -2,8 +2,11 @@ package com.example.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,9 +29,6 @@ public class ShowBooks extends AppCompatActivity{
         TextView price=findViewById(R.id.Price);
         TextView description=findViewById(R.id.Description);
 
-
-
-
         name.setText(RetrievedName);
         author.setText(cursor.getString(4));
         publisher.setText(cursor.getString(2));
@@ -36,5 +36,35 @@ public class ShowBooks extends AppCompatActivity{
         quantity.setText(cursor.getString(5));
         price.setText(cursor.getString(6)+" LE");
         description.setText(cursor.getString(7));
+
+        Button homeBtn= findViewById(R.id.homeBtn);
+        Button categoryBtn= findViewById(R.id.categoryBtn);
+        Button cartBtn= findViewById(R.id.cartBtn);
+        Button adminBtn= findViewById(R.id.adminBtn);
+
+        homeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ShowBooks.this,MainActivity.class);
+                startActivity(i);
+            }
+        });
+
+        categoryBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ShowBooks.this,Category.class);
+                startActivity(i);
+            }
+        });
+
+        cartBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ShowBooks.this,Cart.class);
+                startActivity(i);
+            }
+        });
+
     }
 }

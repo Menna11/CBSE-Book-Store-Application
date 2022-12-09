@@ -99,7 +99,7 @@
         android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="394dp"
         app:layout_constraintBottom_toTopOf="@+id/adminBtn"
@@ -131,6 +131,19 @@
         android:layout_marginStart="324dp"
         android:layout_marginTop="608dp"
         android:text="Admin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="171dp"
+        android:layout_marginEnd="206dp"
+        android:textColor="#651FFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
