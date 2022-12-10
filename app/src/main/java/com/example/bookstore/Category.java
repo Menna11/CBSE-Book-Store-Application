@@ -22,17 +22,17 @@ public class Category extends AppCompatActivity{
 
         categories=findViewById(R.id.books_list);
         ArrayAdapter<String> categ_arr;
-        categ_arr=new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,category);
+        categ_arr=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,category);
         categories.setAdapter(categ_arr);
 
         categories.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(position==0) {
-                    Intent i = new Intent(Category.this, MainActivity.class);
+                    Intent i = new Intent(Category.this,CategorizedBooks.class);
+                    i.putExtra("Category",position);
                     startActivity(i);
-                }
+
             }
         });
 
