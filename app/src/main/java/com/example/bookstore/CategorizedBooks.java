@@ -2,8 +2,11 @@ package com.example.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -27,6 +30,15 @@ public class CategorizedBooks extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    public void StartActivity(String bookname,String bookauthor,Integer image)
+    {
+        Intent i = new Intent(CategorizedBooks.this,SelectedBook.class);
+        i.putExtra("Name",bookname);
+        i.putExtra("Author",bookauthor);
+        i.putExtra("Image",image);
+        startActivity(i);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,29 +50,56 @@ public class CategorizedBooks extends AppCompatActivity {
                     matchedbooks=dbHelper.getBooksname("Romance");
                     matchedauthors=dbHelper.getBooksauthors("Romance");
                     FillList(matchedbooks,matchedauthors,Rimageid);
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                        {
+                            StartActivity(matchedbooks[position],matchedauthors[position],Rimageid[position]);
+                        }
+                    });
+
         }
         if(num==1)
         {
             matchedbooks=dbHelper.getBooksname("SC-FI");
             matchedauthors=dbHelper.getBooksauthors("SC-FI");
             FillList(matchedbooks,matchedauthors,Simageid);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    StartActivity(matchedbooks[position],matchedauthors[position],Simageid[position]);
+                }
+            });
+
         }
-        else if(num==2)
+        if(num==2)
         {
             matchedbooks=dbHelper.getBooksname("Horror");
             matchedauthors=dbHelper.getBooksauthors("Horror");
             FillList(matchedbooks,matchedauthors,Himageid);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    StartActivity(matchedbooks[position],matchedauthors[position],Himageid[position]);
+                }
+            });
         }
-        else if(num==3)
+        if(num==3)
 
         {
             matchedbooks=dbHelper.getBooksname("Thriller");
             matchedauthors=dbHelper.getBooksauthors("Thriller");
             FillList(matchedbooks,matchedauthors,Timageid);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    StartActivity(matchedbooks[position],matchedauthors[position],Timageid[position]);
+                }
+            });
         }
-
-
-
 
 
 
