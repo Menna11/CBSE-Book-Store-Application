@@ -152,6 +152,21 @@ public class DBHelper  extends SQLiteOpenHelper
 
      }
 
+
+public void createanOrder(int price,int bookid,int userid)
+{
+    ContentValues row=new ContentValues();
+    row.put("totalprice",price);
+    row.put("bookids",bookid);
+    row.put("userids",userid);
+    libraryDatabase=getWritableDatabase();
+    libraryDatabase.insert("Cart",null,row);
+}
+
+
+
+
+
 public void createNewBook(int bookid, String name, String publisher, String category, String author, int quantity, int price, String description)
 {
     ContentValues row = new ContentValues();
@@ -234,6 +249,25 @@ public Cursor fetchBooks()
 
         }
        return bnames;
+    }
+
+    public int[] getOrder(int userid)
+
+    {
+        libraryDatabase=getReadableDatabase();
+        String []str1 = {Integer.toString(userid)};
+        Cursor cursor=libraryDatabase.rawQuery("select totalprice from Cart where userids like ?",str1);
+
+        int[]prices=new int[cursor.getCount()];
+        int i=0;
+        while(cursor.moveToNext())
+        {
+            int price=cursor.getInt(0);
+            prices[i]=price;
+            i++;
+
+        }
+        return prices;
     }
 
     public String[] getBooksauthors(String Category)

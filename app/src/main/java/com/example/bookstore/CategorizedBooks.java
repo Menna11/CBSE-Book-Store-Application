@@ -13,21 +13,23 @@ import java.util.ArrayList;
 
 public class CategorizedBooks extends AppCompatActivity {
 
+    Integer newbook=R.drawable.i1;
     ListView listView;
-    Integer[] Rimageid={R.drawable.rb1,R.drawable.rb2};
-    Integer[] Simageid={R.drawable.scfi1,R.drawable.scfi2};
-    Integer[] Himageid={R.drawable.h1,R.drawable.h2};
-    Integer[] Timageid={R.drawable.t1,R.drawable.t2};
+    Integer[] Rimageid={R.drawable.rb1,R.drawable.rb2,newbook,newbook};
+    Integer[] Simageid={R.drawable.scfi1,R.drawable.scfi2,newbook,newbook};
+    Integer[] Himageid={R.drawable.h1,R.drawable.h2,newbook,newbook};
+    Integer[] Timageid={R.drawable.t1,R.drawable.t2,newbook,newbook};
+
 
     String[] matchedbooks={};
     String[]matchedauthors={};
 
-
     public void FillList(String[]books,String[]authors,Integer[]images)
     {
-        BookAdapter adapter=new BookAdapter(CategorizedBooks.this,books,authors,images);
-        listView=findViewById(R.id.book_list_view);
-        listView.setAdapter(adapter);
+            BookAdapter adapter = new BookAdapter(CategorizedBooks.this, books, authors, images);
+            listView = findViewById(R.id.book_list_view);
+            listView.setAdapter(adapter);
+
     }
 
     public void StartActivity(String bookname,String bookauthor,Integer image)
@@ -38,6 +40,8 @@ public class CategorizedBooks extends AppCompatActivity {
         i.putExtra("Image",image);
         startActivity(i);
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class CategorizedBooks extends AppCompatActivity {
         {
             matchedbooks=dbHelper.getBooksname("SC-FI");
             matchedauthors=dbHelper.getBooksauthors("SC-FI");
+
             FillList(matchedbooks,matchedauthors,Simageid);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -80,9 +85,10 @@ public class CategorizedBooks extends AppCompatActivity {
             FillList(matchedbooks,matchedauthors,Himageid);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                {
-                    StartActivity(matchedbooks[position],matchedauthors[position],Himageid[position]);
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    StartActivity(matchedbooks[position], matchedauthors[position], Himageid[position]);
+
                 }
             });
         }
